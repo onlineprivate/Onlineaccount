@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of America - Loading</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars during splash */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full viewport height */
+            background-color: #FFFFFF; /* White background */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #2F3D61; /* Dark Blue/Navy for Bank of America text - closer to image */
+            opacity: 0; /* Start invisible for fade-in */
+            animation: fadeIn 1s ease-in forwards; /* Fade in animation */
+
+            /* Subtle background pattern (optional, can be removed if not desired) */
+            /* This attempts to mimic a very light geometric pattern. */
+            background-image:
+                linear-gradient(45deg, rgba(230,230,230,0.1) 25%, transparent 25%, transparent 75%, rgba(230,230,230,0.1) 75%, rgba(230,230,230,0.1)),
+                linear-gradient(45deg, rgba(230,230,230,0.1) 25%, transparent 25%, transparent 75%, rgba(230,230,230,0.1) 75%, rgba(230,230,230,0.1));
+            background-size: 30px 30px; /* Size of the pattern squares */
+            background-position: 0 0, 15px 15px; /* Offset to create a grid effect */
+        }
+
+        .splash-content {
+            text-align: center;
+            opacity: 1; /* Start visible for fade-out */
+            animation: fadeOut 1s ease-out 4s forwards; /* Fade out after 4 seconds (total 5s with initial delay) */
+            /* Added margin-top to push content slightly down from center, like in the image */
+            margin-top: -5vh; /* Adjust this value as needed to shift up/down */
+        }
+
+        .splash-logo {
+            width: 150px; /* Adjust size as needed */
+            height: auto;
+            margin-bottom: 10px; /* Reduced margin to bring text closer */
+        }
+
+        .splash-text {
+            font-size: 1.8em; /* Adjusted font size slightly smaller */
+            font-weight: bold;
+            letter-spacing: 0.5px; /* Slightly reduced letter spacing */
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-content">
+        <img src="1.png" alt="Bank of America Logo" class="splash-logo">
+        <div class="splash-text">BANK OF AMERICA</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 5000); // Total duration of splash screen
+        });
+    </script>
+</body>
+</html>

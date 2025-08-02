@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bank of America</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #F0F2F5; /* Light gray background, common for app UIs */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px; /* Add some padding for smaller screens */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        .login-container {
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Take full width on small screens */
+            max-width: 400px; /* Max width for larger screens */
+            text-align: center;
+            box-sizing: border-box;
+            position: relative; /* Needed for absolute positioning of messages */
+        }
+
+        .login-logo {
+            width: 100px; /* Adjust logo size for login page */
+            height: auto;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #2F3D61; /* Dark blue */
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left; /* Align labels left */
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .input-group input[type="email"],
+        .input-group input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #DDDDDD;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Crucial for full width padding */
+        }
+
+        .input-group input[type="email"]:focus,
+        .input-group input[type="password"]:focus {
+            border-color: #CC0000; /* Bank of America red on focus */
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(204, 0, 0, 0.2);
+        }
+
+        .login-button {
+            background-color: #CC0000; /* Bank of America red */
+            color: #FFFFFF;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%; /* Full width button */
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: #A30000; /* Darker red on hover */
+        }
+
+        .forgot-password, .signup-link {
+            display: block;
+            margin-top: 15px;
+            color: #007BFF; /* A standard link blue */
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .forgot-password:hover, .signup-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Custom Message Styling --- */
+        .message-box {
+            position: fixed; /* Fixed position relative to viewport */
+            top: 20px; /* From top of the screen */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Adjust for true centering */
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: white;
+            z-index: 1000; /* Ensure it's on top */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .message-box.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .message-box.success {
+            background-color: #28a745; /* Green for success */
+        }
+
+        .message-box.error {
+            background-color: #dc3545; /* Red for error */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .login-container {
+                padding: 20px;
+                margin: 10px; /* Add some margin on very small screens */
+            }
+            .login-logo {
+                width: 80px;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .input-group input {
+                padding: 10px;
+            }
+            .login-button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            .message-box {
+                width: calc(100% - 40px); /* Adjust width for small screens */
+                top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="1.png" alt="Bank of America Logo" class="login-logo">
+        
+        <h2>Log In to Bank of America</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            <button type="submit" class="login-button">Sign In</button>
+        </form>
+        <a href="forgotten.html" class="forgot-password">Forgot Password?</a>
+        <a href="#" class="signup-link">Enroll Now</a>
+    </div>
+
+    <div id="messageBox" class="message-box"></div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageBox = document.getElementById('messageBox');
+
+            // Defined correct credentials (corrected email to match provided case)
+            const correctEmail = 'Ijobaogonla@gmail.com'; // Corrected 'i' to 'I'
+            const correctPassword = 'KELLY123$$';
+
+            // Clear previous messages and classes
+            messageBox.textContent = '';
+            messageBox.classList.remove('show', 'success', 'error');
+
+            if (email === correctEmail && password === correctPassword) {
+                // Successful login
+                messageBox.classList.add('show', 'success');
+                messageBox.textContent = 'Login Successful! Redirecting...';
+
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500); // Short delay to show success message
+            } else {
+                // Incorrect credentials
+                messageBox.classList.add('show', 'error');
+                messageBox.textContent = 'Invalid Email or Password. Please try again.';
+
+                // Hide message after a few seconds
+                setTimeout(() => {
+                    messageBox.classList.remove('show');
+                }, 3000); // Message visible for 3 seconds
+            }
+        });
+    </script>
+</body>
+</html>

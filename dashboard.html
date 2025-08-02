@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Bank of America</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 0;
+      background-color: #F0F2F5;
+      color: #333;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .header {
+      background-color: #CC0000;
+      color: #FFFFFF;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .header-left h1 {
+      margin: 0;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-right .icon-button {
+      background: none;
+      border: none;
+      color: #FFFFFF;
+      font-size: 1.2em;
+      margin-left: 15px;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .header-right .icon-button:hover {
+      opacity: 0.8;
+    }
+
+    .user-pic {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-left: 15px;
+      border: 2px solid #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .user-pic:hover {
+      transform: scale(1.1);
+    }
+
+    .main-content {
+      padding: 20px;
+      max-width: 900px;
+      margin: 20px auto;
+    }
+
+    .section-card {
+      background-color: #FFFFFF;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+    }
+
+    .section-card h2 {
+      color: #2F3D61;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .balance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .balance-item {
+      background-color: #E6F0F6;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid #D0E0EE;
+    }
+
+    .balance-item h3 {
+      margin-top: 0;
+      color: #555;
+      font-size: 1em;
+      margin-bottom: 5px;
+    }
+
+    .balance-item p {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #2F3D61;
+      margin: 0;
+    }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 15px;
+      text-align: center;
+    }
+
+    .quick-link-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 10px;
+      background-color: #F8F8F8;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #555;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .quick-link-item:hover {
+      background-color: #EFEFEF;
+      color: #CC0000;
+    }
+
+    .quick-link-item i {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      color: #CC0000;
+    }
+
+    .quick-link-item span {
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+
+    .transaction-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .transaction-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .transaction-item:last-child {
+      border-bottom: none;
+    }
+
+    .transaction-info h4 {
+      margin: 0;
+      color: #333;
+      font-size: 1em;
+    }
+
+    .transaction-info p {
+      margin: 5px 0 0;
+      color: #777;
+      font-size: 0.9em;
+    }
+
+    .transaction-amount {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #28a745;
+      text-align: right;
+    }
+
+    .transaction-amount.expense {
+      color: #dc3545;
+    }
+
+    .logout-button {
+      background-color: #6c757d;
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 30px;
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .logout-button:hover {
+      background-color: #5a6268;
+    }
+
+    @media (max-width: 768px) {
+      .balance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-links-grid {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+      }
+
+      .quick-link-item i {
+        font-size: 1.5em;
+      }
+
+      .quick-link-item span {
+        font-size: 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <h4>Bank of America</h4>
+    </div>
+    <div class="header-right">
+      <button class="icon-button"><i class="fas fa-bell"></i></button>
+      <button class="icon-button"><i class="fas fa-cog"></i></button>
+      <button class="icon-button"><i class="fas fa-user-circle"></i></button>
+      <img class="user-pic" src="2.jpg" alt="User Profile Picture"/>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="section-card">
+      <h2>David Taylor</h2>
+      <div class="balance-grid">
+        <div class="balance-item"><h3>Checking Account</h3><p>$50,234,507.56</p></div>
+        <div class="balance-item"><h3>Savings Account</h3><p>$5,089,678.90</p></div>
+        <div class="balance-item"><h3>Credit Card</h3><p>$+40,000,450.00</p></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Quick Actions</h2>
+      <div class="quick-links-grid">
+        <a href="transfer.html" class="quick-link-item"><i class="fas fa-exchange-alt"></i><span>Transfer</span></a>
+        <a href="bill.html" class="quick-link-item"><i class="fas fa-money-bill-transfer"></i><span>Pay Bills</span></a>
+        <a href="zell.html" class="quick-link-item"><i class="fas fa-mobile-alt"></i><span>Zelle</span></a>
+        <a href="transfer.html" class="quick-link-item"><i class="fas fa-plus-circle"></i><span>Deposit</span></a>
+        <a href="Activity.html" class="quick-link-item"><i class="fas fa-history"></i><span>Activity</span></a>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Recent Transactions</h2>
+      <ul class="transaction-list">
+        <li class="transaction-item"><div class="transaction-info"><h4>Grocery Store</h4><p>July 15, 2025</p></div><div class="transaction-amount expense">-$720,500.20</div></li>
+        <li class="transaction-item"><div class="transaction-info"><h4>Government Paycheck</h4><p>July 13, 2025</p></div><div class="transaction-amount">+$41,500.00</div></li>
+        <li class="transaction-item"><div class="transaction-info"><h4>Coffee Shop</h4><p>July 11, 2025</p></div><div class="transaction-amount expense">-$5,000.50</div></li>
+        <li class="transaction-item"><div class="transaction-info"><h4>Online Subscription</h4><p>July 09, 2025</p></div><div class="transaction-amount expense">-$2,000.99</div></li>
+      </ul>
+      <ul class="transaction-list">
+        <li class="transaction-item"><div class="transaction-info"><h4>Grocery Store</h4><p>July 07, 2025</p></div><div class="transaction-amount expense">-$92,500.20</div></li>
+        <li class="transaction-item"><div class="transaction-info"><h4>Military Paycheck</h4><p>July 06, 2025</p></div><div class="transaction-amount">+$12,001,500.00</div></li>
+        <li class="transaction-item"><div class="transaction-info"><h4>Coffee Shop</h4><p>July 05, 2025</p></div><div class="transaction-amount expense">-$5,000.50</div></li>
+        <li class="transaction-item"><div class="transaction-info"><h4>Google Subscription</h4><p>July 04, 2025</p></div><div class="transaction-amount expense">-$20,000.99</div></li>
+      </ul>
+    </div>
+
+    <button class="logout-button" onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    function logout() {
+      alert('Logging out...');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

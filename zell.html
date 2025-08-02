@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Send to Zelle | KC Bank</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f0f0f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #4B0082;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      background-color: #4B0082;
+      color: white;
+      padding: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #36006b;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    Send Money to Zelle Account
+  </header>
+
+  <div class="container">
+    <div class="form-group">
+      <label for="recipientEmail">Recipient's Zelle Email</label>
+      <input type="email" id="recipientEmail" placeholder="e.g. user@email.com">
+    </div>
+
+    <div class="form-group">
+      <label for="amount">Amount (USD)</label>
+      <input type="number" id="amount" placeholder="e.g. 1000">
+    </div>
+
+    <div class="form-group">
+      <label for="note">Note (Optional)</label>
+      <input type="text" id="note" placeholder="What’s this for?">
+    </div>
+
+    <button onclick="sendZelle()">Send Now</button>
+
+    <p class="note">Instant delivery to the Zelle user. Double-check the email before sending.</p>
+  </div>
+
+  <script>
+    function sendZelle() {
+      const email = document.getElementById('recipientEmail').value;
+      const amount = document.getElementById('amount').value;
+      const note = document.getElementById('note').value;
+
+      if (!email || !amount) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const password = prompt("Enter KC Transaction Password:");
+
+      if (password !== "4029") {
+        alert("❌ Incorrect password. Transaction canceled.");
+        return;
+      }
+
+      // All checks passed
+      alert(`✅ $${amount} sent to ${email} via Zelle.\nNote: ${note || "No note."}`);
+      alert("📞 Contact this signal number if payment not received.\nMore Signal only: +1 904-504-6310");
+    }
+  </script>
+
+</body>
+</html>
